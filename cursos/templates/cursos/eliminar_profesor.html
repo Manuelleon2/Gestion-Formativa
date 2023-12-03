@@ -1,0 +1,19 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <div class="form-container">
+        <h2>Eliminar Profesor</h2>
+        <p>¿Estás seguro de que deseas eliminar este profesor?</p>
+        <p><strong>Identificación:</strong> {{ profesor.identificacion }}</p>
+        <p><strong>Nombre:</strong> {{ profesor.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ profesor.apellido }}</p>
+
+        <form method="post" action="{% url 'eliminar_profesor' profesor_id=profesor.identificacion %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+        <a href="{% url 'lista_profesores' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+</div>
+{% endblock %}

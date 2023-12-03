@@ -1,0 +1,27 @@
+{% extends 'plantilla.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <form method="post" enctype="multipart/form-data" class="p-4 bg-light">
+        <h2>Editar Lección: {{ leccion.nombre }}</h2>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_nombre" class="form-label">Nombre:</label>
+            {{ form.nombre }}
+        </div>
+        <div class="mb-3">
+            <label for="id_curso" class="form-label">Curso:</label>
+            {{ form.curso }}
+        </div>
+        <div class="mb-3">
+            <label for="id_descripcion_actividad" class="form-label">Descripción de la Actividad:</label>
+            {{ form.descripcion_actividad }}
+        </div>
+        <div class="mb-3">
+            <label for="id_contenido" class="form-label">Contenido:</label>
+            {{ form.contenido }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</div>
+{% endblock %}

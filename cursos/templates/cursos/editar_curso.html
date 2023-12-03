@@ -1,0 +1,37 @@
+{% extends 'plantilla.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <form method="post" enctype="multipart/form-data" class="p-4 bg-light" id="cursoForm">
+        <h2>Editar Curso</h2>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_nombre" class="form-label">Nombre:</label>
+            {{ form.nombre }}
+        </div>
+        <div class="mb-3">
+            <label for="id_descripcion" class="form-label">Descripción:</label>
+            {{ form.descripcion }}
+        </div>
+        <div class="mb-3" id="profesoresContainer">
+            <label for="id_profesores" class="form-label">Profesores:</label>
+            {{ form.profesores }}
+            <button type="button" class="btn btn-sm btn-secondary" onclick="agregarCampo('profesoresContainer', 'profesores')">Agregar Profesor</button>
+        </div>
+        <div class="mb-3" id="estudiantesContainer">
+            <label for="id_estudiantes" class="form-label">Estudiantes:</label>
+            {{ form.estudiantes }}
+            <button type="button" class="btn btn-sm btn-secondary" onclick="agregarCampo('estudiantesContainer', 'estudiantes')">Agregar Estudiante</button>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</div>
+
+<script>
+    function agregarCampo(containerId, fieldId) {
+        const container = document.getElementById(containerId);
+        const selectField = document.getElementsByName(fieldId)[0].cloneNode(true);
+        container.appendChild(selectField);
+    }
+</script>
+{% endblock %}

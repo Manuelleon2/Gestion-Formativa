@@ -1,0 +1,25 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            <h2>Crear Profesor</h2>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_identificacion" class="form-label">Identificación</label>
+                <input type="text" name="identificacion" class="form-control" id="id_identificacion" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="id_nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_apellido" class="form-label">Apellido</label>
+                <input type="text" name="apellido" class="form-control" id="id_apellido" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Profesor</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

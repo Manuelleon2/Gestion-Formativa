@@ -1,0 +1,48 @@
+{% extends 'plantilla.html' %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'agregar_curso' %}" class="btn btn-success">Agregar Curso</a>
+</div>
+<div class="row">
+    {% for curso in cursos %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ curso.nombre }}</h5>
+                <p class="card-text">{{ curso.descripcion }}</p>
+                <p class="card-text">Profesores:</p>
+                <div class="scrollable-list">
+                    <ul class="list-group">
+                        {% for profesor in curso.profesores.all %}
+                        <li class="list-group-item">{{ profesor.nombre }} {{ profesor.apellido }} ({{ profesor.identificacion }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <p class="card-text">Estudiantes:</p>
+                <div class="scrollable-list">
+                    <ul class="list-group">
+                        {% for estudiante in curso.estudiantes.all %}
+                        <li class="list-group-item">{{ estudiante.nombre }} {{ estudiante.apellido }} ({{ estudiante.identificacion }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="mt-3">
+                    <a href="{% url 'editar_curso' curso_id=curso.pk %}" class="btn btn-primary">Editar</a>
+                    <form method="post" action="{% url 'eliminar_curso' curso_id=curso.pk %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<style>
+    .scrollable-list {
+        max-height: 150px; /* Ajusta esta altura según tu diseño */
+        overflow-y: auto;
+    }
+</style>
+{% endblock %}
